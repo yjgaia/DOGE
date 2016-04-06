@@ -11,6 +11,8 @@ global.GO = CLASS({
 		//OPTIONAL: params.centerX
 		//OPTIONAL: params.centerY
 		//OPTIONAL: params.angle
+		//OPTIONAL: params.c
+		//OPTIONAL: params.on
 		
 		var
 		// image
@@ -30,6 +32,12 @@ global.GO = CLASS({
 		
 		// angle
 		angle = params.angle === undefined ? 0 : params.angle,
+		
+		// c
+		c = params.c,
+		
+		// on
+		on = params.on,
 		
 		// div
 		div,
@@ -67,14 +75,16 @@ global.GO = CLASS({
 		div = DIV({
 			style : {
 				position : 'absolute'
-			}
+			},
+			c : c,
+			on : on
 		}).appendTo(BODY);
 		
 		self.setImage = setImage = function(image) {
 			//REQUIRED: image
 			
 			if (img === undefined) {
-				div.append(img = IMG({
+				div.prepend(img = IMG({
 					src : image
 				}));
 			} else {

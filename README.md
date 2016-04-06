@@ -1,5 +1,6 @@
 # DOGE - DOM Game Engine
 ![ScreenShot](https://raw.githubusercontent.com/Hanul/DOGE/master/doge.jpg)
+
 Galaxy Gear S2와 같은 웨어러블 기기의 경우, HTML5 Canvas나 WebGL(Gear S2의 경우 WebGL을 지원하지 않음)에서 30fps 정도로 드로잉을 하게 되면 배터리 소모가 매우 심합니다.
 DOGE는 이런 경우에 DOM을 Game Object로 이용하여 배터리 소모를 줄이면서 게임을 만들 수 있는 엔진입니다.
 
@@ -27,8 +28,9 @@ var ball = GO({
 * `LOOP(fps, function(fps) {})` 1초에 `fps`번 함수를 실행합니다.
 
 ## 샘플
-* [Ball](samples/ball) - http://something.hanul.me/DOGE/samples/ball/ball.html
-* [Wall](samples/wall) - http://something.hanul.me/DOGE/samples/wall/wall.html
+* [Ball 소스코드](samples/ball) - http://something.hanul.me/DOGE/samples/ball/ball.html
+* [Wall 소스코드](samples/wall) - http://something.hanul.me/DOGE/samples/wall/wall.html
+* [Touch 소스코드](samples/touch) - http://something.hanul.me/DOGE/samples/touch/touch.html
 
 ## 라이센스
 [MIT](LICENSE)
