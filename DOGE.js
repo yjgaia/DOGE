@@ -56,7 +56,13 @@ global.GO = CLASS({
 		getCenterY,
 		
 		// get angle.
-		getAngle;
+		getAngle,
+		
+		// get width.
+		getWidth,
+		
+		// get height.
+		getHeight;
 		
 		div = DIV({
 			style : {
@@ -138,6 +144,22 @@ global.GO = CLASS({
 		
 		self.getAngle = getAngle = function() {
 			return angle;
+		};
+		
+		self.getWidth = getWidth = function() {
+			if (img === undefined) {
+				return 0;
+			} else {
+				return img.getWidth();
+			}
+		};
+		
+		self.getHeight = getHeight = function() {
+			if (img === undefined) {
+				return 0;
+			} else {
+				return img.getHeight();
+			}
 		};
 	}
 });
