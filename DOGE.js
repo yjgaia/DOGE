@@ -3,6 +3,12 @@
  */
 global.GO = CLASS({
 	
+	preset : function() {
+		'use strict';
+
+		return NODE;
+	},
+	
 	init : function(inner, self, params) {
 		//REQUIRED: params
 		//OPTIONAL: params.image
@@ -32,12 +38,6 @@ global.GO = CLASS({
 		
 		// angle
 		angle = params.angle === undefined ? 0 : params.angle,
-		
-		// c
-		c = params.c,
-		
-		// on
-		on = params.on,
 		
 		// div
 		div,
@@ -75,10 +75,10 @@ global.GO = CLASS({
 		div = DIV({
 			style : {
 				position : 'absolute'
-			},
-			c : c,
-			on : on
+			}
 		}).appendTo(BODY);
+		
+		inner.setDom(div);
 		
 		self.setImage = setImage = function(image) {
 			//REQUIRED: image
@@ -154,22 +154,6 @@ global.GO = CLASS({
 		
 		self.getAngle = getAngle = function() {
 			return angle;
-		};
-		
-		self.getWidth = getWidth = function() {
-			if (img === undefined) {
-				return 0;
-			} else {
-				return img.getWidth();
-			}
-		};
-		
-		self.getHeight = getHeight = function() {
-			if (img === undefined) {
-				return 0;
-			} else {
-				return img.getHeight();
-			}
 		};
 	}
 });

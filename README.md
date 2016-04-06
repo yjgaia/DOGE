@@ -26,6 +26,8 @@ var ball = GO({
 
 ## [UJS](https://github.com/Hanul/UJS) 함수들 중 게임에서 쓸만한 것들
 * `LOOP(fps, function(fps) {})` 1초에 `fps`번 함수를 실행합니다.
+* `WIN_WIDTH()` 윈도우의 가로 길이를 픽셀 단위로 반환합니다.
+* `WIN_HEIGHT()` 윈도우의 세로 길이를 픽셀 단위로 반환합니다.
 
 ## 샘플
 * [Ball 소스코드](samples/ball) - http://something.hanul.me/DOGE/samples/ball/ball.html
