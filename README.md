@@ -38,7 +38,7 @@ var ball = GO({
 * [Touch 소스코드](samples/touch) - http://something.hanul.me/DOGE/samples/touch/touch.html
 * [Map 소스코드](samples/map) - http://something.hanul.me/DOGE/samples/map/map.html
 
-## 타이젠에서 유용한 코드들
+## 타이젠(Gear S2)에서 유용한 코드들
 ### 화면이 꺼지거나 다른 앱을 켤 때
 ```javascript
 EVENT('visibilitychange', function() {
@@ -57,6 +57,28 @@ EVENT('tizenhwkey', function(e) {
 		try {
             tizen.application.getCurrentApplication().exit();
         } catch (ignore) {}
+	}
+});
+```
+
+### 베젤을 돌릴 때
+```javascript
+EVENT('rotarydetent', function(e) {
+	if (direction === 'CW') {
+		...
+	} else if (direction === 'CCW') {
+		...
+	}
+});
+```
+
+### 화면 계속 켜두기
+`config.xml`에 `privilege`에 `http://tizen.org/privilege/power`를 설정해 주어야 동작합니다.
+```javascript
+tizen.power.request('SCREEN', 'SCREEN_NORMAL');
+EVENT('visibilitychange', function() {
+	if (HIDDEN() === true) {
+		tizen.power.request('SCREEN', 'SCREEN_NORMAL');
 	}
 });
 ```
