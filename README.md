@@ -30,6 +30,22 @@ var ball = GO({
 * `LOOP(fps, function(fps) {})` 1초에 `fps`번 함수를 실행합니다.
 * `WIN_WIDTH()` 윈도우의 가로 길이를 픽셀 단위로 반환합니다.
 * `WIN_HEIGHT()` 윈도우의 세로 길이를 픽셀 단위로 반환합니다.
+* `SOUND({mp3:, ogg:, isLoop:})` 사운드를 재생하는 클래스입니다. `play`로 사운드를 재생하고 `stop`으로 재생을 멈춥니다.
+
+    ```javascript
+    var
+    // sound
+    sound = SOUND({
+        mp3 : 'test.mp3',
+        // ogg : 'test.ogg' // 타이젠은 mp3만 인식합니다.
+        isLoop : true
+    });
+    
+    sound.play()
+    
+    sound.stop()
+    ```
+    
 * 이 외에 여러가지 함수들이 있습니다. [UJS-BROWSER](https://github.com/Hanul/UJS/blob/master/DOC/UJS-BROWSER.md)와 [UJS-COMMON](https://github.com/Hanul/UJS/blob/master/DOC/UJS-COMMON.md)를 참고하세요.
 
 ## 샘플
