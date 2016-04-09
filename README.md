@@ -107,7 +107,7 @@ node test-server.js
 `http://localhost:8410`에 접속합니다.
 
 ### Gear S2 Emulator
-테스트 서버에는 Gear S2 Emulator가 포함되어 있습니다. `http://localhost:8410/gear-s2-emulator.html`에 접속합니다.
+테스트 서버에는 Gear S2 Emulator가 포함되어 있습니다. `http://localhost:8410/gear-s2-emulator.html`에 접속합니다. 마우스 휠을 돌리면 베젤을 돌리는 것과 같은 이벤트가 발생합니다.
 
 ## 라이센스
 [MIT](LICENSE)
