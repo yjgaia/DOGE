@@ -9,7 +9,7 @@ function handler(req, res) {
 	if (url.indexOf('?') !== -1) { // eliminate param.
 		url = url.substring(0, url.indexOf('?'));
 	}
-	if (url == '/') { // root
+	if (url === '/') { // root
 		url = '/index.html';
 	}
 
