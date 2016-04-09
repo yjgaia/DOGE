@@ -30,7 +30,7 @@ var ball = GO({
 * `LOOP(fps, function(fps) {})` 1초에 `fps`번 함수를 실행합니다.
 * `WIN_WIDTH()` 윈도우의 가로 길이를 픽셀 단위로 반환합니다.
 * `WIN_HEIGHT()` 윈도우의 세로 길이를 픽셀 단위로 반환합니다.
-* `SOUND({mp3:, ogg:, isLoop:})` 사운드를 재생하는 클래스입니다. `play`로 사운드를 재생하고 `stop`으로 재생을 멈춥니다.
+* `SOUND({mp3:, ogg:, isLoop:})` 사운드를 재생하는 클래스입니다. `play`로 사운드를 재생하고 `stop`으로 재생을 멈춥니다. [사운드 캐싱하기](https://github.com/Hanul/DOGE/wiki/%EC%82%AC%EC%9A%B4%EB%93%9C-%EC%BA%90%EC%8B%B1%ED%95%98%EA%B8%B0)
 
     ```javascript
     var
@@ -98,6 +98,16 @@ EVENT('visibilitychange', function() {
 	}
 });
 ```
+
+## 테스트 서버 실행 (test-server.js)
+`node`로 테스트 서버를 실행할 수 있습니다.
+```
+node test-server.js
+```
+`http://localhost:8410`에 접속합니다.
+
+### Gear S2 Emulator
+테스트 서버에는 Gear S2 Emulator가 포함되어 있습니다. `http://localhost:8410/gear-s2-emulator.html`에 접속합니다.
 
 ## 라이센스
 [MIT](LICENSE)

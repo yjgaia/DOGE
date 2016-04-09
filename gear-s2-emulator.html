@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<title>Gear S2 Emulator</title>
+		<style>
+			@import url(../../import/BASE_STYLE.css);
+		</style>
+	</head>
+	<body>
+		<script src="import/UJS-BROWSER.MIN.js"></script>
+		<script>INIT_OBJECTS();</script>
+		<script>
+			READY(function() {
+				
+				var
+				// wrapper
+				wrapper,
+				
+				// iframe
+				iframe,
+				
+				// rotate bezel up.
+				rotateBezelUp,
+				
+				// rotate bezel down.
+				rotateBezelDown,
+				
+				// press back button.
+				pressBackButton;
+				
+				DIV({
+					style : {
+						position : 'absolute',
+						width : '100%',
+						height : '100%',
+						overflow : 'hidden'
+					},
+					c : wrapper = DIV({
+						style : {
+							position : 'absolute',
+							width : 878,
+							height : 986
+						}
+					})
+				}).appendTo(BODY);
+				
+				IMG({
+					src : 'gear-s2.png'
+				}).appendTo(wrapper);
+				
+				iframe = IFRAME({
+					name : 'view',
+					style : {
+						position : 'absolute',
+						left : 259,
+						top : 312,
+						width : 360,
+						height : 360,
+						borderRadius : 180
+					},
+					src : 'samples/bezel/bezel.html'
+				}).appendTo(wrapper);
+				
+				EVENT('resize', RAR(function() {
+					wrapper.addStyle({
+						left : (WIN_WIDTH() - wrapper.getWidth()) / 2,
+						top : (WIN_HEIGHT() - wrapper.getHeight()) / 2
+					});
+				}));
+				
+				view.tizen = {
+					power : {
+						request : function(resource, state) {
+							console.log('call tizen.power.request resource=' + resource + ' state=' + state);
+						}
+					},
+					application : {
+						getCurrentApplication : function() {
+							return {
+								exit : function() {
+									console.log('call tizen.application.getCurrentApplication().exit()');
+								}
+							};
+						}
+					}
+				};
+				
+				rotateBezelUp = function() {
+					
+					var
+					// event
+					evt;
+					
+					if (view.document.createEvent !== undefined) {
+						evt = view.document.createEvent('HTMLEvents');
+						evt.initEvent('rotarydetent', true, true);
+						evt.detail = {
+							direction : 'CW'
+						};
+						evt.eventName = 'rotarydetent';
+						view.document.dispatchEvent(evt);
+					} else {
+						evt = view.document.createEventObject();
+						evt.eventType = 'rotarydetent';
+						evt.detail = {
+							direction : 'CW'
+						};
+						evt.eventName = 'rotarydetent';
+						view.document.fireEvent('on' + evt.eventType, evt);
+					}
+				};
+				
+				rotateBezelDown = function() {
+					
+					var
+					// event
+					evt;
+					
+					if (view.document.createEvent !== undefined) {
+						evt = view.document.createEvent('HTMLEvents');
+						evt.initEvent('rotarydetent', true, true);
+						evt.detail = {
+							direction : 'CCW'
+						};
+						evt.eventName = 'rotarydetent';
+						view.document.dispatchEvent(evt);
+					} else {
+						evt = view.document.createEventObject();
+						evt.eventType = 'rotarydetent';
+						evt.detail = {
+							direction : 'CCW'
+						};
+						evt.eventName = 'rotarydetent';
+						view.document.fireEvent('on' + evt.eventType, evt);
+					}
+				};
+				
+				pressBackButton = function() {
+					
+					var
+					// event
+					evt;
+					
+					if (view.document.createEvent !== undefined) {
+						evt = view.document.createEvent('HTMLEvents');
+						evt.initEvent('tizenhwkey', true, true);
+						evt.keyName = 'back';
+						evt.eventName = 'tizenhwkey';
+						view.document.dispatchEvent(evt);
+					} else {
+						evt = view.document.createEventObject();
+						evt.eventType = 'tizenhwkey';
+						evt.keyName = 'back';
+						evt.eventName = 'tizenhwkey';
+						view.document.fireEvent('on' + evt.eventType, evt);
+					}
+				};
+				
+				// controller
+				DIV({
+					style : {
+						position : 'absolute',
+						left : 10,
+						top : 10
+					},
+					c : [H1({
+						style : {
+							marginBottom : 10
+						},
+						c : 'Gear S2 Emulator'
+					}), FORM({
+						c : [INPUT({
+							style : {
+								width : 240
+							},
+							name : 'src',
+							value : iframe.getSrc()
+						}), INPUT({
+							type : 'submit',
+							value : 'GO'
+						})],
+						on : {
+							submit : function(e, form) {
+								iframe.setSrc(form.getData().src);
+							}
+						}
+					}), INPUT({
+						type : 'button',
+						value : 'Bezel Up',
+						on : {
+							tap : rotateBezelUp
+						}
+					}), INPUT({
+						type : 'button',
+						value : 'Bezel Down',
+						on : {
+							tap : rotateBezelDown
+						}
+					}), INPUT({
+						type : 'button',
+						value : 'Back Button',
+						on : {
+							tap : pressBackButton
+						}
+					})]
+				}).appendTo(BODY);
+				
+				EVENT('mousewheel', function(e) {
+					if (e.getWheelDelta() > 0) {
+						rotateBezelUp();
+					} else {
+						rotateBezelDown();
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
