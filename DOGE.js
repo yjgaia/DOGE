@@ -1,7 +1,7 @@
 /**
- * Game Object 
+ * Layer
  */
-global.GO = CLASS({
+global.LAYER = CLASS({
 	
 	preset : function() {
 		'use strict';
@@ -11,7 +11,6 @@ global.GO = CLASS({
 	
 	init : function(inner, self, params) {
 		//REQUIRED: params
-		//OPTIONAL: params.image
 		//OPTIONAL: params.x
 		//OPTIONAL: params.y
 		//OPTIONAL: params.centerX
@@ -21,9 +20,6 @@ global.GO = CLASS({
 		//OPTIONAL: params.on
 		
 		var
-		// image
-		image = params.image,
-		
 		// x
 		x = params.x === undefined ? 0 : params.x,
 		
@@ -39,14 +35,14 @@ global.GO = CLASS({
 		// angle
 		angle = params.angle === undefined ? 0 : params.angle,
 		
+		// parent center x
+		parentCenterX = 0,
+		
+		// parent center y
+		parentCenterY = 0,
+		
 		// div
 		div,
-		
-		// img
-		img,
-		
-		// set image.
-		setImage,
 		
 		// move.
 		move,
@@ -80,55 +76,42 @@ global.GO = CLASS({
 		
 		inner.setDom(div);
 		
-		self.setImage = setImage = function(image) {
-			//REQUIRED: image
-			
-			if (img === undefined) {
-				div.prepend(img = IMG({
-					src : image
-				}));
-			} else {
-				img.setSrc(image);
-			}
-		};
-		
-		if (image !== undefined) {
-			setImage(image);
-		}
-		
 		self.move = move = function(position) {
-			//REQUIRED: position
+			//OPTIONAL: position
 			//OPTIONAL: position.x
 			//OPTIONAL: position.y
 			//OPTIONAL: position.centerX
 			//OPTIONAL: position.centerY
 			//OPTIONAL: position.angle
 			
-			if (position.x !== undefined) {
-				x = position.x;
-			}
-			
-			if (position.y !== undefined) {
-				y = position.y;
-			}
-			
-			if (position.centerX !== undefined) {
-				centerX = position.centerX;
-			}
-			
-			if (position.centerY !== undefined) {
-				centerY = position.centerY;
-			}
-			
-			if (position.angle !== undefined) {
-				angle = position.angle;
+			if (position !== undefined) {
+				
+				if (position.x !== undefined) {
+					x = position.x;
+				}
+				
+				if (position.y !== undefined) {
+					y = position.y;
+				}
+				
+				if (position.centerX !== undefined) {
+					centerX = position.centerX;
+				}
+				
+				if (position.centerY !== undefined) {
+					centerY = position.centerY;
+				}
+				
+				if (position.angle !== undefined) {
+					angle = position.angle;
+				}
 			}
 			
 			div.addStyle({
 				left : x,
 				top : y,
-				marginLeft : -centerX,
-				marginTop : -centerY,
+				marginLeft : parentCenterX - centerX,
+				marginTop : parentCenterY - centerY,
 				transformOrigin : centerX + 'px ' + centerY + 'px',
 				transform : 'rotate(' + angle + 'deg)'
 			});
@@ -155,6 +138,168 @@ global.GO = CLASS({
 		self.getAngle = getAngle = function() {
 			return angle;
 		};
+		
+		OVERRIDE(self.appendTo, function(origin) {
+			
+			self.appendTo = appendTo = function(node) {
+				//REQUIRED: node
+				
+				if (node.checkIsInstanceOf(LAYER) === true) {
+					
+					parentCenterX = node.getCenterX();
+					parentCenterY = node.getCenterY();
+					
+					move();
+				}
+				
+				return origin(node);
+			};
+		});
 	}
 });
 
+/**
+ * Game Object 
+ */
+global.GO = CLASS({
+	
+	preset : function() {
+		'use strict';
+
+		return LAYER;
+	},
+	
+	init : function(inner, self, params) {
+		//REQUIRED: params
+		//OPTIONAL: params.image
+		//OPTIONAL: params.x
+		//OPTIONAL: params.y
+		//OPTIONAL: params.centerX
+		//OPTIONAL: params.centerY
+		//OPTIONAL: params.angle
+		//OPTIONAL: params.c
+		//OPTIONAL: params.on
+		
+		var
+		// image
+		image = params.image,
+		
+		// img
+		img,
+		
+		// set image.
+		setImage;
+		
+		self.setImage = setImage = function(image) {
+			//REQUIRED: image
+			
+			if (img === undefined) {
+				self.prepend(img = IMG({
+					src : image
+				}));
+			} else {
+				img.setSrc(image);
+			}
+		};
+		
+		if (image !== undefined) {
+			setImage(image);
+		}
+	}
+});
+
+/**
+ * Tile
+ */
+global.TILE = CLASS({
+	
+	preset : function() {
+		'use strict';
+
+		return LAYER;
+	},
+	
+	init : function(inner, self, params) {
+		//REQUIRED: params
+		//OPTIONAL: params.image
+		//OPTIONAL: params.x
+		//OPTIONAL: params.y
+		//OPTIONAL: params.centerX
+		//OPTIONAL: params.centerY
+		//OPTIONAL: params.xCount
+		//OPTIONAL: params.yCount
+		//OPTIONAL: params.angle
+		//OPTIONAL: params.c
+		//OPTIONAL: params.on
+		
+		var
+		// image
+		image = params.image,
+		
+		// x count
+		xCount = params.xCount,
+		
+		// y count
+		yCount = params.yCount,
+		
+		// children
+		children = [],
+		
+		// set image.
+		setImage,
+		
+		// get x count.
+		getXCount,
+		
+		// get y count.
+		getYCount;
+		
+		self.setImage = setImage = function(image) {
+			//REQUIRED: image
+			
+			EACH(children, function(child) {
+				child.remove();
+			});
+			child = [];
+			
+			REPEAT(yCount, function(y) {
+				
+				REPEAT(xCount, function(x) {
+					
+					var
+					// img
+					img = IMG({
+						style : {
+							float : 'left'
+						},
+						src : image
+					});
+					
+					if (y === 0 && x === 0) {
+						img.on('load', function() {
+							self.addStyle({
+								width : img.getWidth() * xCount
+							});
+						});
+					}
+					
+					child.push(img);
+					
+					self.append(img);
+				});
+			});
+		};
+		
+		if (image !== undefined) {
+			setImage(image);
+		}
+		
+		self.getXCount = getXCount = function() {
+			return xCount;
+		};
+		
+		self.getYCount = getYCount = function() {
+			return yCount;
+		};
+	}
+});

@@ -25,6 +25,30 @@ var ball = GO({
 * `go.getWidth()` 너비를 가져옵니다.
 * `go.getHeight()` 높이를 가져옵니다.
 
+## TILE
+Tile
+```
+var tile = TILE({
+	image : 'tile.jpg',
+	x : WIN_WIDTH() / 2,
+	y : WIN_HEIGHT() / 2,
+	centerX : 300 * 2.5,
+	centerY : 300 * 2.5,
+	xCount : 5,
+	yCount : 5
+});
+```
+* `tile.move({ x:, y:, centerX:, centerY:, angle: })` 이동시킵니다.
+* `tile.getX()` x 좌표를 가져옵니다.
+* `tile.getY()` y 좌표를 가져옵니다.
+* `tile.getCenterX()` 중점 x 좌표를 가져옵니다.
+* `tile.getCenterY()` 중점 y 좌표를 가져옵니다.
+* `tile.getXCount()` x 축 타일 개수를 가져옵니다.
+* `tile.getYCount()` y 축 타일 개수를 가져옵니다.
+* `tile.getAngle()` 회전 각도를 가져옵니다.
+* `tile.getWidth()` 너비를 가져옵니다.
+* `tile.getHeight()` 높이를 가져옵니다.
+
 ## [UJS](https://github.com/Hanul/UJS) 함수들 중 게임에서 쓸만한 것들
 * `READY(function() {})` 모든 JS 파일들이 로드 된 이후에 실행합니다.
 * `LOOP(fps, function(fps) {})` 1초에 `fps`번 함수를 실행합니다.
@@ -53,6 +77,7 @@ var ball = GO({
 * [Wall 소스코드](samples/wall) - http://something.hanul.me/DOGE/samples/wall/wall.html
 * [Touch 소스코드](samples/touch) - http://something.hanul.me/DOGE/samples/touch/touch.html
 * [Map 소스코드](samples/map) - http://something.hanul.me/DOGE/samples/map/map.html
+* [Tile 소스코드](samples/tile) - http://something.hanul.me/DOGE/samples/tile/tile.html
 
 ## 타이젠(Gear S2)에서 유용한 코드들
 ### 화면이 꺼지거나 다른 앱을 켤 때
@@ -108,6 +133,7 @@ node test-server.js
 
 ### Gear S2 Emulator
 테스트 서버에는 Gear S2 Emulator가 포함되어 있습니다. `http://localhost:8410/gear-s2-emulator.html`에 접속합니다. 마우스 휠을 돌리면 베젤을 돌리는 것과 같은 이벤트가 발생합니다.
+* `gear-s2-emulator.html` 파일 내 `samples/bezel/bezel.html` 경로를 본인의 프로젝트에 맞게 변경해 주시기 바랍니다.
 
 ## 라이센스
 [MIT](LICENSE)
