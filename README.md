@@ -16,12 +16,13 @@ var ball = GO({
 	y : 360
 });
 ```
-* `go.move({ x:, y:, centerX:, centerY:, angle: })` 이동시킵니다.
+* `go.move({ x:, y:, centerX:, centerY:, angle:, scale: })` 이동시킵니다.
 * `go.getX()` x 좌표를 가져옵니다.
 * `go.getY()` y 좌표를 가져옵니다.
 * `go.getCenterX()` 중점 x 좌표를 가져옵니다.
 * `go.getCenterY()` 중점 y 좌표를 가져옵니다.
 * `go.getAngle()` 회전 각도를 가져옵니다.
+* `go.getScale()` 크기 비율을 가져옵니다.
 * `go.getWidth()` 너비를 가져옵니다.
 * `go.getHeight()` 높이를 가져옵니다.
 
@@ -38,7 +39,7 @@ var tile = TILE({
 	yCount : 5
 });
 ```
-* `tile.move({ x:, y:, centerX:, centerY:, angle: })` 이동시킵니다.
+* `tile.move({ x:, y:, centerX:, centerY:, angle:, scale: })` 이동시킵니다.
 * `tile.getX()` x 좌표를 가져옵니다.
 * `tile.getY()` y 좌표를 가져옵니다.
 * `tile.getCenterX()` 중점 x 좌표를 가져옵니다.
@@ -46,6 +47,7 @@ var tile = TILE({
 * `tile.getXCount()` x 축 타일 개수를 가져옵니다.
 * `tile.getYCount()` y 축 타일 개수를 가져옵니다.
 * `tile.getAngle()` 회전 각도를 가져옵니다.
+* `tile.getScale()` 크기 비율을 가져옵니다.
 * `tile.getWidth()` 너비를 가져옵니다.
 * `tile.getHeight()` 높이를 가져옵니다.
 

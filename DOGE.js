@@ -16,6 +16,7 @@ global.LAYER = CLASS({
 		//OPTIONAL: params.centerX
 		//OPTIONAL: params.centerY
 		//OPTIONAL: params.angle
+		//OPTIONAL: params.scale
 		//OPTIONAL: params.c
 		//OPTIONAL: params.on
 		
@@ -34,6 +35,9 @@ global.LAYER = CLASS({
 		
 		// angle
 		angle = params.angle === undefined ? 0 : params.angle,
+		
+		// scale
+		scale = params.scale === undefined ? 1 : params.scale,
 		
 		// parent center x
 		parentCenterX = 0,
@@ -62,6 +66,9 @@ global.LAYER = CLASS({
 		// get angle.
 		getAngle,
 		
+		// get scale.
+		getScale,
+		
 		// get width.
 		getWidth,
 		
@@ -83,6 +90,7 @@ global.LAYER = CLASS({
 			//OPTIONAL: position.centerX
 			//OPTIONAL: position.centerY
 			//OPTIONAL: position.angle
+			//OPTIONAL: position.scale
 			
 			if (position !== undefined) {
 				
@@ -105,6 +113,10 @@ global.LAYER = CLASS({
 				if (position.angle !== undefined) {
 					angle = position.angle;
 				}
+				
+				if (position.scale !== undefined) {
+					scale = position.scale;
+				}
 			}
 			
 			div.addStyle({
@@ -113,7 +125,7 @@ global.LAYER = CLASS({
 				marginLeft : parentCenterX - centerX,
 				marginTop : parentCenterY - centerY,
 				transformOrigin : centerX + 'px ' + centerY + 'px',
-				transform : 'rotate(' + angle + 'deg)'
+				transform : 'rotate(' + angle + 'deg) scale(' + scale + ')'
 			});
 		};
 		
@@ -137,6 +149,10 @@ global.LAYER = CLASS({
 		
 		self.getAngle = getAngle = function() {
 			return angle;
+		};
+		
+		self.getScale = getScale = function() {
+			return scale;
 		};
 		
 		OVERRIDE(self.appendTo, function(origin) {
