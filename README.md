@@ -4,8 +4,8 @@
 Galaxy Gear S2와 같은 웨어러블 기기의 경우, HTML5 Canvas나 WebGL(Gear S2의 경우 WebGL을 지원하지 않음)에서 30fps 정도로 드로잉을 하게 되면 배터리 소모가 매우 심합니다.
 DOGE는 이런 경우에 DOM을 Game Object로 이용하여 배터리 소모를 줄이면서 게임을 만들 수 있는 엔진입니다.
 
-* 한국어 발음은 "도지" 입니다.
-* [UJS](https://github.com/Hanul/UJS)를 기반으로 제작되어있습니다. 따라서 [UJS](https://github.com/Hanul/UJS)의 모든 기능을 사용할 수 있습니다.
+* 한국어 발음은 "도기" 입니다.
+* [UPPERCASE-CORE-BROWSER](https://github.com/Hanul/UPPERCASE/blob/master/DOC/GUIDE/UPPERCASE-CORE-BROWSER.md)를 기반으로 제작되어있습니다. 따라서 [UPPERCASE-CORE-BROWSER](https://github.com/Hanul/UPPERCASE/blob/master/DOC/GUIDE/UPPERCASE-CORE-BROWSER.md)의 모든 기능을 사용할 수 있습니다.
 
 ## GO
 Game Object
